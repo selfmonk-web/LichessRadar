@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LichessRadar</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__logo">
+      <span class="header__icon">📡</span>
+      <div>
+        <div class="header__title">LichessRadar</div>
+        <div class="header__sub">Never miss a prize tournament</div>
+      </div>
+    </div>
+    <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
+  </header>
+
+  <!-- Add tournament panel -->
+  <div class="add-panel" id="addPanel">
+    <div class="add-panel__row">
+      <input type="text" id="addUrlInput" class="add-input"
+             placeholder="Paste lichess.org/tournament/… or /swiss/… link">
+      <button class="add-btn" id="addBtn">Add</button>
+    </div>
+    <div class="add-error" id="addError"></div>
+  </div>
+
+  <!-- Filter bar — only All and Prize -->
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="prize">💰 Prize</button>
+    <button class="filter-btn" data-filter="favorites">⭐ Favorites</button>
+  </div>
+
+  <!-- Sort bar -->
+  <div class="sort-bar">
+    <span class="sort-label">Sort:</span>
+    <select id="sortSelect" class="sort-select">
+      <option value="date">Soonest first</option>
+      <option value="favorites">Favorites first</option>
+      <option value="prize">Prize first</option>
+      <option value="saved">Recently saved</option>
+    </select>
+  </div>
+
+  <!-- Tournament list -->
+  <div class="list" id="tournamentList"></div>
+
+  <!-- Empty state -->
+  <div class="empty" id="emptyState" style="display:none">
+    <div class="empty__icon">📡</div>
+    <div class="empty__title">No tournaments saved yet</div>
+    <div class="empty__desc">
+      Visit any Lichess tournament page and click <strong>Save to Radar</strong>,<br>
+      or paste a link above.
+    </div>
+  </div>
+
+  <!-- Note editor overlay -->
+  <div class="note-overlay" id="noteOverlay" style="display:none">
+    <div class="note-box">
+      <div class="note-box__title">📝 Add note</div>
+      <div class="note-box__tourname" id="noteTourName"></div>
+      <textarea id="noteInput" class="note-textarea"
+                placeholder="e.g. 50€ prize, important tournament…" maxlength="120"></textarea>
+      <div class="note-box__actions">
+        <button class="note-cancel" id="noteCancelBtn">Cancel</button>
+        <button class="note-save" id="noteSaveBtn">Save note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings panel -->
+  <div class="settings-panel" id="settingsPanel" style="display:none">
+    <div class="settings-panel__title">⚙️ Settings</div>
+
+    <div class="setting-section-label">Multi-alert — notify me before start:</div>
+    <div class="multi-alert-grid">
+      <label class="alert-check"><input type="checkbox" name="alert" value="30min"> 30 min</label>
+      <label class="alert-check"><input type="checkbox" name="alert" value="1h">   1 hour</label>
+      <label class="alert-check"><input type="checkbox" name="alert" value="6h">   6 hours</label>
+      <label class="alert-check"><input type="checkbox" name="alert" value="12h">  12 hours</label>
+      <label class="alert-check"><input type="checkbox" name="alert" value="24h">  24 hours</label>
+    </div>
+
+    <div class="setting-row setting-row--toggle">
+      <span class="setting-label">Auto-hide finished tournaments</span>
+      <input type="checkbox" id="autoRemove" checked>
+    </div>
+
+    <button class="danger-btn" id="clearAllBtn">🗑 Clear all saved tournaments</button>
+    <button class="back-btn" id="backBtn">← Back</button>
+  </div>
+
+  <!-- Links bar — always visible -->
+  <div class="links-bar" id="linksBar">
+    <a href="https://lichess.org/team/tourneyradar" target="_blank" class="links-bar__btn links-bar__btn--team">📡 TourneyRadar</a>
+    <a href="https://lichess.org" target="_blank" class="links-bar__btn links-bar__btn--lichess">♟ Lichess</a>
+    <a href="https://buymeacoffee.com/nightintel" target="_blank" class="links-bar__btn links-bar__btn--coffee">☕ Support</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" id="mainFooter">
+    <span id="footerCount">0 saved</span>
+    <span class="footer__tip">💡 Browse Lichess → Save to Radar</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
